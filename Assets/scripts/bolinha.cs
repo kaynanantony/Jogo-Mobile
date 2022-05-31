@@ -12,6 +12,7 @@ public class bolinha : MonoBehaviour
     public float vida = 3;
     public Vector3 posicaoPlayer;
     public GameObject posicaodePartida;
+    private bool checktimer = false;
 
     public float quantia;
     public GameObject moeda;
@@ -39,6 +40,19 @@ public class bolinha : MonoBehaviour
 
             }
         }
+        if (checktimer)
+        {
+            timer -= Time.deltaTime;
+
+
+            if (timer<=0)
+            {
+                speed = speed / buffdespeed;
+                timer = 8;
+                checktimer = false;
+                
+            }
+        }
 
     }
 
@@ -53,11 +67,8 @@ public class bolinha : MonoBehaviour
         {
             speed = speed * buffdespeed;
             Destroy(other.gameObject);
-            timer -= Time.deltaTime;
-            if (timer <= 0) 
-            {
-                speed = speed / buffdespeed;
-            }
+            checktimer = true;
+            
 
         }
     }
